@@ -13,20 +13,20 @@ class AboutIteration(Koan):
         for num in it:
             total += num
 
-        self.assertEqual(__ , total)
+        self.assertEqual(15 , total)
 
     def test_iterating_with_next(self):
         stages = iter(['alpha','beta','gamma'])
 
         try:
-            self.assertEqual(__, next(stages))
+            self.assertEqual('alpha', next(stages))
             next(stages)
-            self.assertEqual(__, next(stages))
+            self.assertEqual('gamma', next(stages))
             next(stages)
         except StopIteration as ex:
             err_msg = 'Ran out of iterations'
 
-        self.assertRegex(err_msg, __)
+        self.assertRegex(err_msg, 'Ran out of iterations')
 
     # ------------------------------------------------------------------
 
