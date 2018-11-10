@@ -39,8 +39,55 @@ def score(dice):
     
     # A generator is a function that returns an object (iterator) that
     # we can iterate over one value at a time.
-    
-    return result 
+    dice = sorted(dice)
+    result = 0
+  
+    """
+    Define a dictionary where keys are numbers rolled and values are number of times the corresponding number is rolled
+    ---
+    e.g. [1, 1, 1, 2, 3]
+
+  result = {
+    '1': 3,
+    '2': 1,
+    '3': 1
+  }
+  """
+  dict = {}
+  for val in dice:
+    if val in dict:
+      dict[val] += 1
+    else:
+      dict[val] = 1
+
+  # Iterate through dictionary and calculate total score
+  for key, cnt in dict.items():
+    if cnt == 5:
+      if key == 1:
+        result += 1200
+      else:
+        result += ((key * 100) + 100)
+    elif cnt == 4:
+      if key == 1:
+        result += 1100
+      else:
+        result += (key * 100) + 50
+    elif cnt == 3:
+      if key == 1:
+        result += 1000
+      else:
+        result += key * 100
+    elif cnt == 2:
+      if key == 1:
+        result += 200
+      else:
+        result += 100
+    elif cnt == 1:
+      if key == 1:
+        result += 100
+      else:
+        result += 50
+return result 
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
