@@ -37,51 +37,8 @@ def score(dice):
     Calculate the total score given an array of dice roll outcomes.
     """
     
-    # Set initial score value and number counter    
-    result = 0
-    counter = 0
-    
     # A generator is a function that returns an object (iterator) that
     # we can iterate over one value at a time.
-    
-    # What is the difference / similarity between generator expressions
-    # and list comprehensions?
-
-    # Why are generators used in Python?
-   
-    # Define a generator to iterate over dice one at a time 
-    def my_gen(values):
-        for value in values:
-            yield value
-
-    my_iterator_object = my_gen(dice)
-    
-    next(my_iterator_object)
-    next(my_iterator_object)
-    next(my_iterator_object)
-    next(my_iterator_object)
-    next(my_iterator_object)
-
-    # How to check for three instances of a number 
-    You need to be able to count it, how do I know 
-    [1, 2, 3, 1, 1]
-    [1, 1, 2, 3, 1]
-    [1, 1, 1, 2, 3]
-    [2, 1, 3, 1, 1]
-    [2, 3, 1, 1, 1] 
-
-    if len(set(x)) <= 3: we have three instances of something
-
-    # Take care of case where there are no outcomes 
-    if len(dice) == 0: return 0
-
-    # A set of three ones is 1000 points
-    for value in dice:
-        if value == 1  
-       
-
-    # I want to iterate over dice, one at a time and yield a result
-    # Sounds like a generator  
     
     return result 
 
