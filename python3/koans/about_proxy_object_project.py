@@ -19,13 +19,42 @@
 from runner.koan import *
 
 class Proxy:
+    """ The basic idea is to intercept the way methods and properties are
+    called in Python and manipulate them if necessary or pass them on
+    to the parent object.
+    """
+
     def __init__(self, target_object):
-        # WRITE CODE HERE
+        object.__setattr__(self, '_messages', [])
+        object.__setattr__(self, '_obj', target_object)
 
         #initialize '_obj' attribute last. Trust me on this!
-        self._obj = target_object
+
+        # Why can't you set _messages and _obj this way?
+        # self._messages = []
+        # self._obj = target_object
+
 
     # WRITE CODE HERE
+
+    def __getattr__(self, name):
+        pass
+
+    def __setattr__(self, name, value):
+        """If __setattr__() wants to assign to an instance attribute,
+        it should not simply execute self.name = value — this would
+        cause a recursive call to itself.
+        """
+        pass
+
+    def messages(self):
+        pass
+
+    def was_called(self):
+        pass
+
+    def number_of_times_called(self):
+        pass
 
 # The proxy object should pass the following Koan:
 #
