@@ -18,6 +18,7 @@
 
 from runner.koan import *
 
+
 class Proxy:
     """ The basic idea is to intercept the way methods and properties are
     called in Python and manipulate them if necessary or pass them on
@@ -25,36 +26,29 @@ class Proxy:
     """
 
     def __init__(self, target_object):
-        object.__setattr__(self, '_messages', [])
-        object.__setattr__(self, '_obj', target_object)
+        self._messages = []
+        self._obj = target_object
 
-        #initialize '_obj' attribute last. Trust me on this!
+    def __getattr__(self, attr_name):
+        self._messages.append(attr_name)
+        return self._obj.__getattribute__(attr_name)
 
-        # Why can't you set _messages and _obj this way?
-        # self._messages = []
-        # self._obj = target_object
-
-
-    # WRITE CODE HERE
-
-    def __getattr__(self, name):
-        pass
-
-    def __setattr__(self, name, value):
-        """If __setattr__() wants to assign to an instance attribute,
-        it should not simply execute self.name = value — this would
-        cause a recursive call to itself.
-        """
-        pass
+    def __setattr__(self, attr_name, value):
+        self_attrs = ['_messages', '_obj', 'was_called']
+        if attr_name in self_attrs:
+            object.__setattr__(self, attr_name, value)
+        else:
+            self._messages.append(attr_name)
+            self._obj.__setattr__(attr_name, value)
 
     def messages(self):
-        pass
+        return self._messages
 
-    def was_called(self):
-        pass
+    def was_called(self, attr_name):
+        return attr_name in self._messages
 
-    def number_of_times_called(self):
-        pass
+    def number_of_times_called(self, attr_name):
+        return self._messages.count(attr_name) 
 
 # The proxy object should pass the following Koan:
 #
@@ -88,7 +82,6 @@ class AboutProxyObjectProject(Koan):
         ex = None
         with self.assertRaises(AttributeError):
             tv.no_such_method()
-
 
     def test_proxy_reports_methods_have_been_called(self):
         tv = Proxy(Television())
@@ -126,6 +119,7 @@ class AboutProxyObjectProject(Koan):
 # The following code is to support the testing of the Proxy class.  No
 # changes should be necessary to anything below this comment.
 
+
 # Example class using in the proxy testing above.
 class Television:
     def __init__(self):
@@ -148,6 +142,7 @@ class Television:
 
     def is_on(self):
         return self._power == 'on'
+
 
 # Tests for the Television class.  All of theses tests should pass.
 class TelevisionTest(Koan):
