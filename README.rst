@@ -1,7 +1,7 @@
-## Started
+Started
 - 7/13/2018
 
-## Completed
+Completed
 - 12/15/18
 
 ============
